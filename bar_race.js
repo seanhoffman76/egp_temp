@@ -1,8 +1,6 @@
-var link = '/Economic-Growth-Project/javascript_postgres/bar_race.json';
+var link = 'bar_race.json';
 
-// json = FileAttachment("example.json").json()
-
-d3.json("/Economic-Growth-Project/javascript_postgres/bar_race.json", function(error, data) {
+d3.json("bar_race.json", function(error, data) {
   data.forEach(function(d) {  
     d.year = +d.year;
     d.country = d.country;
