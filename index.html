@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>GDP Analysis</title>
+</head>
+<body>
+
+  <!-- D3 JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- Our JavaScript -->
+  <!-- <script type="text/javascript" src="bar_race.js"></script> -->
+  <script type="text/javascript">
+  var margin = {top: 40, right: 20, bottom: 60, left: 130},
+    width = 1100 - margin.left -margin.right,
+    height = 700 - margin.top - margin.bottom;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" +margin.left + "," + margin.top + ")")
+
+
+
+var link = '/Economic-Growth-Project/javascript_postgres/bar_race.json';
+
+// json = FileAttachment("example.json").json()
+
+d3.json("/Economic-Growth-Project/javascript_postgres/bar_race.json", function(error, data) {
+  data.forEach(function(d) {  
+    d.year = +d.year;
+    d.country = d.country;
+    d.continent_code = d.continent_code;
+    d.two_letter_cc = d.two_letter_cc;
+    d.three_letter_cc = d.three_letter_cc;
+    d.total_gdp = +d.total_gdp;
+    d.rank = +d.rank;
+    console.log(d.year);
+    console.log(d.country);
+    console.log(d.continent_code);
+    console.log(d.two_letter_cc);
+    console.log(d.three_letter_cc);
+    console.log(d.total_gdp);
+    console.log(d.rank);
+  })
+});
+
+// set the x and y value ranges
+var x = d3.scaleOrdinal().rangeRoundBands([0, width], .05);
+
+var y = d3.scaleLinear().range([height, 0]);
+
+// define the x and y axis
+var xAxis = d3.svg.axis()
+.scale(x)
+.orient("bottom")
+
+var yAxis = d3.svg.axis()
+.scale(y)
+.orient("left")
+
+// set the domain of the x, y scale so we can map data using the scale created previously
+x.domain(data.map(function(d) { return d.year; }));
+
+y.domain([0, d3.max(data, function(d) { return d.total_gdp; })]);
+
+// add axes to our SVG
+svg.append("g")
+.attr("transform", "translate(0," + height + ")")
+.call(xAxis)
+
+svg.append("g)")
+.call(yAxis)
+  
+  </script>
+</body>
+</html>
