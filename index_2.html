@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <title>GDP Analysis</title>
+</head>
+<body>
+
+  <!-- D3 JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+  
+  <!-- Our JavaScript -->
+  <script type="text/javascript">
+  
+  d3.json("bar_race.json", function(error, data) {
+  data.forEach(function(d) {  
+    d.year = +d.year;
+    d.country = d.country;
+    d.continent_code = d.continent_code;
+    d.two_letter_cc = d.two_letter_cc;
+    d.three_letter_cc = d.three_letter_cc;
+    d.total_gdp = +d.total_gdp;
+    d.rank = +d.rank;
+    console.log(d.year);
+    console.log(d.country);
+    console.log(d.continent_code);
+    console.log(d.two_letter_cc);
+    console.log(d.three_letter_cc);
+    console.log(d.total_gdp);
+    console.log(d.rank);
+  })
+  });
+  
+  </script>
+  
+</body>
+</html>

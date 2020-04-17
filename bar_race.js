@@ -19,6 +19,8 @@ d3.json("bar_race.json", function(error, data) {
   })
 });
 
+viewof replay = html`<button>Replay`
+
 chart = {
   replay;
 
