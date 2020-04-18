@@ -1,65 +1,167 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-  <meta charset="UTF-8">
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <title>GDP Analysis</title>
-  <style>
-    text{
-      font-size: 16px;
-      font-family: Open Sans, sans-serif;
-    }
-    text.title{
-      font-size: 24px;
-      font-weight: 500;
-    }
-      text.subTitle{
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Leaflet JS & CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+    <title>GDP Analysis</title>
+    
+    <link rel="stylesheet" type="text/css" href= "boot.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <!-- <style>
+      .axis {
+        font: 10px sans-serif;
+      }
+
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .axis--y path {
+        display: none;
+      }
+
+      .bar {
+        fill: #3182bd;
+        fill-opacity: .9;
+      }
+
+      .wld {
+        fill: #bd313c;
+      }
+
+      .chart-title {
+        margin-bottom: 0;
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .chart-subTitle{
         font-weight: 500;
         fill: #777777;
       }
-      text.caption{
-        font-weight: 400;
-        font-size: 14px;
-        fill: #777777;
+      
+      .source {
+        margin-top: 0;
+        font-srgb(199, 105, 39)px;
       }
-      text.label{
-        font-weight: 600;
-      }
-    
-      text.valueLabel{
-       font-weight: 300;
-      }
-    
-      text.yearText{
-        font-size: 64px;
-        font-weight: 700;
-        opacity: 0.25;
-      }
-      .tick text {
-        fill: #777777;
-      }
-      .xAxis .tick:nth-child(2) text {
-        text-anchor: start;
-      }
-      .tick line {
-        shape-rendering: CrispEdges;
-        stroke: #dddddd;
-      }
-      .tick line.origin{
-        stroke: #aaaaaa;
-      }
-      path.domain{
-        display: none;
-      }
-  </style>
-</head>
-<body>
+    </style> -->
+  </head>
+  <body>
 
-  <!-- D3 JavaScript -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+    <h1><p class="text-primary">Economic Growth & Life Expectancy</p></h1>
+<h2>
+  <p class="text-success">GDP Analysis by Country</p></h2>
+<h5>
+  <p class="text-warning">by</p></h5>
+<h4><p class="text-info">"The Gross Domestics" </p></h4>
+
+    <ul class="sidenav-tabs">
+    
+      <li class="nav-item">
+        <a class="btn btn-outline-primary" data-toggle="tab" href="#life-ex">Life Expectancy Scatter</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-success" data-toggle="tab" href="#bar">Bar Chart Race</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-warning" data-toggle="tab" href="#capita">Life Expectancy Map</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-info" data-toggle="tab" href="#growth">Life Expectancy Change</a>
+      </li>
+    </ul>
+
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active show" id="bar">
+          <br>
+          <div class="row">
+              <div class="col-xl-8">
+                <div class="container">
+                  <div class="jumbotron">
+                    <br>
+                    <h4 class="chart-title">National GDP As Percentage of Global Economy</h4>
+                    <br>
+                    <h4 class="chart-title"><span class="year"></span></h4>
+                    <br>
+                    <div class="chart"></div>
+                    <p class="source">Source: OurWorldInData.org</p>
+                    <br>
+                    <p>Represents the percentage of the reported global economy that each nation contributed for the top 15 GDP nations in 2017.</p> 
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>  
+        <br>
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade active show" id="life-ex">
+            <br>
+            <div class="row">
+                <div class="col-xl-8">
+                  <div class="container">
+                    <div class="jumbotron">
+                      <br>
+                      <div id="plot"></div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade active show" id="capita">
+            <br>
+            <div class="row">
+                <div class="col-xl-8">
+                  <div class="container">
+                    <div class="jumbotron">
+                      <br>
+                      <div id="map"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <br>
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade active show" id="growth">
+            <br>
+            <div class="row">
+                <div class="col-xl-8">
+                  <div class="container">
+                    <div class="jumbotron">
+                      <br>
+                      <div id="lifex"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    <!-- D3 JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.1/d3.min.js"></script>
   
-  <!-- Our JavaScript -->
-  <script type="text/javascript" src="bar_race_2.js"></script>
-  
-</body>
+    <!-- Our JavaScript -->
+    <script type="text/javascript" src="new_race2.js"></script>
+    <script type="text/javascript" src="plots.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="life_ex_2017.js"></script>
+    <script type="text/javascript" src="logic.js"></script>
+    <script type="text/javascript" src="life_expectancy.js"></script>
+  </body>
 </html>
