@@ -1,13 +1,11 @@
 console.log("lo",lo)
 
-
-// var life={}
-//   Object.keys(lo[0]["country_code"]).forEach(function(temp){
-//     cc=lo[0]["country_code"][temp]
-//     le=lo[0]["life_exp(years)"][temp]
-//     life[cc]=le
-//   })
-// console.log(life)
+var sparkles={}
+Object.keys(lo[0]["country_code"]).forEach(function(temp){
+cc=lo[0]["country_code"][temp]
+le=lo[0]["life_exp(years)"][temp]
+sparkles[cc]=le
+})
 
 var myMap = L.map("map", {
     center: [46.2276, -2.2137],
@@ -21,11 +19,12 @@ var myMap = L.map("map", {
     id: "mapbox.streets",
     accessToken: API_KEY
   }).addTo(myMap);
-  
+  console.log("17")
   function test(name){
     cc=name.ISO_A3
-    if(cc in life){
-      le=life[cc]
+    console.log(name,life)
+    if(cc in sparkles){
+      le=sparkles[cc]
     
     } else{
       le=-1
@@ -57,29 +56,17 @@ else if(le>=50){
  }
   
 
- var mapStyle = {
-    color: "white",
-    fillColor: "pink",
-    fillOpacity: .2,
-    weight: 1
-  };
-  
   var link = "countries.geojson";
-
+ 
   
-  d3.json(link).then (function(life) {
-    var life={}
-      Object.keys(lo[0]["country_code"]).forEach(function(temp){
-      cc=lo[0]["country_code"][temp]
-      le=lo[0]["life_exp(years)"][temp]
-      life[cc]=le
-    })
-    console.log(life)
-    // var link = "life_ex_2017.js";
+  d3.json(link).then (function(lifedata) {
+  
+    console.log("life",lifedata)
+ 
     
   
     // Creating a geoJSON layer with data
-    L.geoJson(life, {
+    L.geoJson(lifedata, {
 
       style: function(feature) {
         return {

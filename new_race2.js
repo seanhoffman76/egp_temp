@@ -1,21 +1,27 @@
+// Initialize the framework for the SVG
     const margin = {top: 20, right: 30, bottom: 40, left: 80};
     const width = 800 - margin.left - margin.right;
     const height = 600 - margin.top - margin.bottom;
     const percentFormat = d3.format('.0%');
     const leftPadding = 5;
-  
+
+    // Provide a delay setting for switching to the next year of data
     const delay = function(d, i) {
       return i * 40;
     };
   
+    // Function to sort values for each year on the GDP percentage
     function sortData(data) {
       return data.sort((a, b) => b.value - a.value);
     }
   
+    // Function to remove a country from the chart in a given year
+    // if it had data the previous cycle, but not the current.
     function removeGeoAreasWithNoData(data) {
       return data.filter(d => d.value);
     }
   
+    // Function to parse data from the csv and split it into the appropriate fields.
     function prepareData(data) {
       return data.reduce((accumulator, d) => {
         Object.keys(d).forEach((k) => {
@@ -42,6 +48,7 @@
       }, {});
     }
   
+    // functions to handle accessing the X & Y axis values and scales
     function xAccessor(d) {
       return d.value;
     }
@@ -78,6 +85,7 @@
           .delay(delay);
     }
   
+    // functions information for drawing the bars each cycle
     function drawBars(el, data, t) {
       let barsG = el.select('.bars-g');
       if (barsG.empty()) {
@@ -101,12 +109,14 @@
           .delay(delay);
     }
   
+    // Construct the SVG using the framework variables defined above.
     const svg = d3.select('.chart').append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
-      .append('g')
+        .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
   
+    // Get the data set from the CSV and parse it using the prepareData function
     fetch('./race_tabperc.csv')
       .then((res) => res.text())
       .then((res) => {

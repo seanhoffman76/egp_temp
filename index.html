@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!-- Leaflet JS & CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
@@ -16,47 +16,6 @@
     
     <link rel="stylesheet" type="text/css" href= "boot.css">
     <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
-    <!-- <style>
-      .axis {
-        font: 10px sans-serif;
-      }
-
-      .axis path,
-      .axis line {
-        fill: none;
-        stroke: #000;
-        shape-rendering: crispEdges;
-      }
-
-      .axis--y path {
-        display: none;
-      }
-
-      .bar {
-        fill: #3182bd;
-        fill-opacity: .9;
-      }
-
-      .wld {
-        fill: #bd313c;
-      }
-
-      .chart-title {
-        margin-bottom: 0;
-        font-size: 24px;
-        font-weight: 500;
-      }
-
-      .chart-subTitle{
-        font-weight: 500;
-        fill: #777777;
-      }
-      
-      .source {
-        margin-top: 0;
-        font-srgb(199, 105, 39)px;
-      }
-    </style> -->
   </head>
   <body>
 
@@ -68,13 +27,14 @@
 <h4><p class="text-info">"The Gross Domestics" </p></h4>
 
     <ul class="sidenav-tabs">
-    
-      <li class="nav-item">
-        <a class="btn btn-outline-primary" data-toggle="tab" href="#life-ex">Life Expectancy Scatter</a>
-      </li>
+
       <li class="nav-item">
         <a class="btn btn-outline-success" data-toggle="tab" href="#bar">Bar Chart Race</a>
       </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-primary" data-toggle="tab" href="#life-ex">Life Expectancy Scatter</a>
+      </li>
+
       <li class="nav-item">
         <a class="btn btn-outline-warning" data-toggle="tab" href="#capita">Life Expectancy Map</a>
       </li>
@@ -125,14 +85,14 @@
           <div class="tab-pane fade active show" id="capita">
             <br>
             <div class="row">
-                <div class="col-xl-8">
+                <!-- <div class="col-xl-8"> -->
                   <div class="container">
                     <div class="jumbotron">
                       <br>
-                      <div id="map"></div>
+                      <div style="width: 700px; height: 600px;" id="map"></div>
                     </div>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
           </div>
         </div>

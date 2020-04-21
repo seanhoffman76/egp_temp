@@ -25,9 +25,9 @@ function buildPlot() {
         var data = [trace1];
 
         var layout = {
-            title: "2017 GDP vs Life Expectancy by Country"
-            // xaxis: gdp,
-            // yaxis: life
+            title: "2017 GDP vs Life Expectancy by Country",
+            xaxis: { title: "Life Expectancy" },
+            yaxis: { title: "Total GDP" }
         };
 
         Plotly.newPlot("plot", data, layout);
